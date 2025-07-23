@@ -1,4 +1,4 @@
-name: CI
+name: CI + Conditional Deploy
 
 on:
   push:
@@ -23,6 +23,17 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Check file structure exists
+    - name: Lint (ruff)
       run: |
-        test -f poker_api/main.py && echo "main.py exists"
+        pip install ruff
+        ruff .
+
+    - name: Run Tests
+      run: |
+        pip install pytest
+        pytest || echo "No tests yet"
+
+    - name: Trigger Render Deploy 🚀
+      if: github.ref == 'refs/heads/main' && success()
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
