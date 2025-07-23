@@ -49,8 +49,6 @@ def root(request: Request):
         }
     }
 
-from fastapi import Query
-
 @app.get("/trivia/search")
 @limiter.limit("5/minute")
 def search_trivia(q: str = Query(..., min_length=1), request: Request = None):
@@ -60,4 +58,3 @@ def search_trivia(q: str = Query(..., min_length=1), request: Request = None):
         or q.lower() in item.get("answer", "").lower()
     ]
     return {"query": q, "results": results}
-
