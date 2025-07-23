@@ -1,9 +1,11 @@
-from fastapi import FastAPI
-# from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Request
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 from pathlib import Path
-import json
 from datetime import datetime
 import random
+import json
 
 app = FastAPI(
     title="Poker Trivia API ♠️",
@@ -11,22 +13,37 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# --- Rate limiting setup ---
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 TRIVIA_PATH = Path(__file__).resolve().parent.parent / "trivia_data" / "questions.json"
 
-# Load all trivia questions from file
+# Load trivia questions
 with open(TRIVIA_PATH, "r", encoding="utf-8") as f:
     questions = json.load(f)
 
 @app.get("/trivia/daily")
-def get_daily_trivia():
+@limiter.limit("5/minute")
+def get_daily_trivia(request: Request):
     today = datetime.utcnow().date().isoformat()
     idx = sum(ord(c) for c in today) % len(questions)
     return questions[idx]
 
 @app.get("/trivia/random")
-def get_random_trivia():
+@limiter.limit("5/minute")
+def get_random_trivia(request: Request):
     return random.choice(questions)
 
 @app.get("/")
-def root():
-    return {"message": "👋 Welcome to the Poker Trivia API!"}
+@limiter.limit("10/minute")
+def root(request: Request):
+    return {
+        "message": "👋 Welcome to the Poker Trivia API!",
+        "docs": "/docs",
+        "endpoints": {
+            "daily": "/trivia/daily",
+            "random": "/trivia/random"
+        }
+    }
