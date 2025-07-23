@@ -1,14 +1,11 @@
-from fastapi import FastAPI, Query
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Query, Request
 from pathlib import Path
 import json
 from datetime import datetime
 import random
-from fastapi import Request
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-
 
 app = FastAPI(
     title="Poker Trivia API ♠️",
