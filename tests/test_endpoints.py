@@ -1,6 +1,8 @@
-import pytest
 from httpx import AsyncClient
-from poker_api.main import app
+from httpx import ASGITransport
+
+transport = ASGITransport(app=app)
+async with AsyncClient(transport=transport, base_url="http://test") as ac:
 
 @pytest.mark.asyncio
 async def test_root():
