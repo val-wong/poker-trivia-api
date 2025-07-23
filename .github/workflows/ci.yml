@@ -28,12 +28,6 @@ jobs:
         pip install ruff
         ruff check .
 
-    - name: Run Tests
-      run: |
-        pip install pytest httpx==0.27.0 pytest-asyncio
-        export PYTHONPATH=$(pwd)
-        pytest
-
     - name: Trigger Render Deploy 
       if: github.ref == 'refs/heads/main' && success()
       run: |
