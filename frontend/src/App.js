@@ -6,7 +6,7 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://poker-trivia-api.onrender.com/trivia/daily")
+    fetch("https://poker-trivia-backend.onrender.com/trivia/daily")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch trivia");
         return res.json();
