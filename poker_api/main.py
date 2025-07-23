@@ -33,7 +33,7 @@ def root():
         "message": "👋 Welcome to the Poker Trivia API!",
         "docs": "/docs",
         "endpoints": {
-            "daily trivia": "/trivia/daily",
-            "random trivia": "/trivia/random"
+            "daily": "/trivia/daily",
+            "random": "/trivia/random"
         }
     }
