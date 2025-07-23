@@ -27,15 +27,13 @@ jobs:
       run: |
         pip install ruff
         ruff check .
-  
-
 
     - name: Run Tests
       run: |
-        pip install pytest
-        pytest || echo "No tests yet"
+        pip install pytest httpx
+        pytest
 
-    - name: Trigger Render Deploy 🚀
+    - name: Trigger Render Deploy 
       if: github.ref == 'refs/heads/main' && success()
       run: |
         curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

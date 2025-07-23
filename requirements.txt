@@ -2,3 +2,5 @@ fastapi
 uvicorn
 pytest
 slowapi>=0.1.8
+pytest
+httpx
