@@ -1,0 +1,27 @@
+[
+    {
+      "id": "cutoff-3bet",
+      "question": "You’re on the button with Q♣ J♠. The cutoff raises to 3BB. What do you do?",
+      "options": ["Fold", "Call", "3-bet", "All-in"],
+      "correct_answer": "3-bet",
+      "explanation": "You have position and blockers to strong hands like AQ/KQ.",
+      "tags": ["preflop", "position", "3bet"]
+    },
+    {
+      "id": "big-blind-call",
+      "question": "You’re in the big blind with 8♣ 9♣. The button min-raises. What’s your play?",
+      "options": ["Fold", "Call", "Raise"],
+      "correct_answer": "Call",
+      "explanation": "Suited connectors perform well in multiway pots and defend well.",
+      "tags": ["preflop", "big blind"]
+    },
+    {
+      "id": "ace-king-late-position",
+      "question": "You have A♠ K♦ in late position. All players fold to you. What’s your move?",
+      "options": ["Fold", "Call", "Raise", "All-in"],
+      "correct_answer": "Raise",
+      "explanation": "AK is a premium hand. Standard open-raise here is optimal.",
+      "tags": ["preflop", "late position", "premium"]
+    }
+  ]
+  
