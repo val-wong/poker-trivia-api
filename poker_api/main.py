@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 from fastapi import FastAPI, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -12,6 +13,24 @@ app = FastAPI(
     title="Poker Trivia API ♠️",
     description="Get daily poker trivia and hand history questions.",
     version="1.0.0"
+)
+
+app = FastAPI(
+    title="Poker Trivia API ♠️",
+    description="Get daily poker trivia and hand history questions.",
+    version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",  # React default dev server
+        "http://localhost:3001",  # Your current frontend port
+        "https://poker-trivia-api.onrender.com",  # Your live backend
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # --- Rate limiting setup ---
