@@ -29,11 +29,4 @@ def get_random_trivia():
 
 @app.get("/")
 def root():
-    return {
-        "message": "👋 Welcome to the Poker Trivia API!",
-        "docs": "/docs",
-        "endpoints": {
-            "daily": "/trivia/daily",
-            "random": "/trivia/random"
-        }
-    }
+    return {"message": "👋 Welcome to the Poker Trivia API!"}
