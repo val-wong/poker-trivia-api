@@ -6,7 +6,7 @@ services:
     startCommand: uvicorn poker_api.main:app --host 0.0.0.0 --port 8000
     autoDeploy: true
 
-  - type: static
+  - type: web
     name: poker-trivia-frontend
     env: static
     buildCommand: cd frontend && npm install && npm run build
