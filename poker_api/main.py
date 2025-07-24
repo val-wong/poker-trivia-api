@@ -25,8 +25,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",  # React default dev server
-        "http://localhost:3001",  # Your current frontend port
-        "https://poker-trivia-api.onrender.com",  # Your live backend
+        "http://localhost:3001",  # current frontend port
+        "https://poker-trivia-api.onrender.com",  #live backend
+        "https://poker-trivia-frontend.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
