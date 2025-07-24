@@ -25,7 +25,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:8002",  # for FastAPI tests
-        "http://localhost:5181",  # if your Vite frontend runs here
+        "http://localhost:5182",  # if your Vite frontend runs here
         "http://localhost:5179",  # or here
         "http://localhost:3000",
         "http://localhost:3001",
