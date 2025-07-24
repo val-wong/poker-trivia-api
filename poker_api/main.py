@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from poker_api.routes.trivia import router as trivia_router  # 👈 ADD THIS
 
 load_dotenv()
 ENV = os.getenv("ENV", "development")
@@ -14,16 +15,7 @@ if ENV == "production":
     ]
 else:
     allowed_origins = [
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://localhost:5175",
-        "http://localhost:5176",
-        "http://localhost:5177",
-        "http://localhost:5178",
-        "http://localhost:5179",
-        "http://localhost:5180",
-        "http://localhost:5181",
-        "http://localhost:5182",
+        f"http://localhost:{port}" for port in range(5173, 5183)
     ]
 
 app.add_middleware(
@@ -33,3 +25,5 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(trivia_router, prefix="/trivia")  # 👈 ADD THIS
