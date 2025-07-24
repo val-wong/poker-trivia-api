@@ -6,4 +6,4 @@ pytest
 httpx
 pytest-asyncio
 python-multipart
-aiofiles
+python-dotenv==1.1.1
