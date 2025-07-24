@@ -24,15 +24,17 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",  # React default dev server
-        "http://localhost:3001",  # current frontend port
-        "https://poker-trivia-api.onrender.com",  #live backend
-        "https://poker-trivia-frontend.onrender.com",
+        "http://localhost:8002",  # for FastAPI tests
+        "http://localhost:5181",  # if your Vite frontend runs here
+        "http://localhost:5179",  # or here
+        "http://localhost:3000",
+        "http://localhost:3001",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # --- Rate limiting setup ---
 limiter = Limiter(key_func=get_remote_address)

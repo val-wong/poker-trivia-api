@@ -1,14 +1,10 @@
 services:
   - type: web
-    name: poker-trivia-backend
+    name: poker-trivia-api
     env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn poker_api.main:app --host 0.0.0.0 --port 8000
-    autoDeploy: true
-
-  - type: web
-    name: poker-trivia-frontend
-    env: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/build
-    autoDeploy: true
+    startCommand: uvicorn poker_api.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: PORT
+        value: 10000
